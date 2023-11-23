@@ -1,5 +1,4 @@
 import Notiflix from 'notiflix';
-
 function createPromise(position, delay) {
   return new Promise((resolve, reject) => {
     const shouldResolve = Math.random() > 0.3;
@@ -29,14 +28,10 @@ document
 
       createPromise(i, currentDelay)
         .then(({ position, delay }) => {
-          Notiflix.Notify.Success(
-            `✅ Fulfilled promise ${position} in ${delay}ms`
-          );
+          console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
         })
         .catch(({ position, delay }) => {
-          Notiflix.Notify.Failure(
-            `❌ Rejected promise ${position} in ${delay}ms`
-          );
+          console.log(`❌ Rejected promise ${position} in ${delay}ms`);
         });
     }
   });
