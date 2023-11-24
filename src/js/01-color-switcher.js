@@ -7,14 +7,19 @@ let intervalId;
 const startButton = document.querySelector('[data-start]');
 const stopButton = document.querySelector('[data-stop]');
 function startColorChange() {
-  startButton.disabled = true;
-  intervalId = setInterval(() => {
-    document.body.style.backgroundColor = getRandomHexColor();
-  }, 1000);
+  if (!intervalId) {
+    startButton.disabled = true;
+    stopButton.disabled = false;
+    intervalId = setInterval(() => {
+      document.body.style.backgroundColor = getRandomHexColor();
+    }, 1000);
+  }
 }
 function stopColorChange() {
   startButton.disabled = false;
+  stopButton.disabled = true;
   clearInterval(intervalId);
+  intervalId = null;
 }
 startButton.addEventListener('click', startColorChange);
 stopButton.addEventListener('click', stopColorChange);
