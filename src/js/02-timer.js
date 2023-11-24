@@ -28,7 +28,7 @@ let startTime;
 startButton.addEventListener('click', () => {
   const selectedDate = datetimePicker.selectedDates[0];
   if (intervalId) {
-    clearInterval(intervalId);
+    stopTimer();
   }
   startTimer(selectedDate);
 });
@@ -37,13 +37,17 @@ function startTimer(endDate) {
   intervalId = setInterval(() => {
     const currentTime = new Date();
     const timeDifference = endDate - currentTime;
-    updateTimer(timeDifference);
-
     if (timeDifference <= 0) {
-      clearInterval(intervalId);
-      startButton.disabled = true;
+      stopTimer();
+      Notiflix.Notify.Success('Time is up!');
+    } else {
+      updateTimer(timeDifference);
     }
   }, 1000);
+}
+function stopTimer() {
+  clearInterval(intervalId);
+  startButton.disabled = true;
 }
 function updateTimer(timeDifference) {
   const { days, hours, minutes, seconds } = convertMs(timeDifference);
@@ -64,5 +68,5 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 function addLeadingZero(value) {
-  return value.toString().padStart(1, '0');
+  return value.toString().padStart(2, '0');
 }
