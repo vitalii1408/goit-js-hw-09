@@ -21,5 +21,6 @@ function stopColorChange() {
   clearInterval(intervalId);
   intervalId = null;
 }
+stopButton.disabled = true;
 startButton.addEventListener('click', startColorChange);
 stopButton.addEventListener('click', stopColorChange);
