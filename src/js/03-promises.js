@@ -23,7 +23,7 @@ document
     const amountInput = document.querySelector('[name="amount"]');
     submitButton.disabled = true;
     const promises = [];
-    for (let i = 1; i < amount; i++) {
+    for (let i = 0; i < amount; i++) {
       const currentDelay = firstDelay + i * delayStep;
       const promise = createPromise(i, currentDelay);
       promise
